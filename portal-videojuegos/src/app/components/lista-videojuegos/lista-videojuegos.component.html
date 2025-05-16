@@ -1,0 +1,41 @@
+<div class="container mt-4">
+    <h2>Listado de Videojuegos</h2>
+
+    <!-- Muestra un mensaje de que se estan cargando los juegos hasta que se
+     haya completado la recopilacion de datos de la api -->
+    <div *ngIf="cargando" class="text-center">
+        <p>Cargando videojuegos...</p>
+    </div>
+
+    <!-- Muestra el mensaje de error de que no se han podido cargar los videojuegos -->
+    <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+    </div>
+  
+    <!-- Muestra los videojuegos solo si no ha habido ningun problema y no sigue cargandolos -->
+    <div *ngIf="!cargando && !error">
+        <div *ngIf="videojuegos.length === 0" class="alert alert-info">
+            No hay videojuegos disponibles.
+        </div>
+        <div class="videojuegos-grid">
+            <div *ngFor="let videojuego of videojuegos" class="videojuego-card">
+                <div class="videojuego-image-container">
+                    <img *ngIf="videojuego.getImagen()" [src]="videojuego.getImagen()" class="videojuego-image" alt="{{ videojuego.getNombre() }}">
+                </div>
+                <div class="videojuego-body">
+                    <h5 class="videojuego-title">{{ videojuego.getNombre() }}</h5>
+                    <div class="videojuego-meta">
+                        <span>{{ videojuego.getPlataforma() }}</span>
+                        <span>{{ videojuego.getEstudio() }}</span>
+                    </div>
+                    <p class="videojuego-price">{{ videojuego.getPrecio() | currency:'EUR' }}</p>
+                    <div class="videojuego-actions">
+                        <button class="btn btn-primary" (click)="verDetalles(videojuego.getId())">Ver detalles</button>
+                        <button class="btn btn-secondary" (click)="editarVideojuego(videojuego.getId())">Editar</button>
+                        <button class="btn btn-danger" (click)="eliminarVideojuego(videojuego.getId())">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

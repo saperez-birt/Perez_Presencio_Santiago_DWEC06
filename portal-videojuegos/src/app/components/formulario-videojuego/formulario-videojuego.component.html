@@ -1,0 +1,73 @@
+<!-- videojuego-form.component.html -->
+<div class="container mt-4">
+  <h2>{{ isEditMode ? 'Editar' : 'Añadir' }} Videojuego</h2>
+  
+    <!-- Muestra un mensaje de que se estan cargando los juegos hasta que se
+     haya completado la recopilacion de datos de la api -->
+    <div *ngIf="cargando" class="text-center">
+        <p>Cargando videojuegos...</p>
+    </div>
+
+    <!-- Muestra el mensaje de error de que no se han podido cargar los videojuegos -->
+    <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+    </div>
+  
+    <form [formGroup]="videojuegoForm" (ngSubmit)="onSubmit()" *ngIf="!cargando">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre*</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre" 
+                    [ngClass]="{'is-invalid': submitted && f['nombre'].errors}">
+            <div *ngIf="submitted && f['nombre'].errors" class="invalid-feedback">
+            <div *ngIf="f['nombre'].errors['required']">El nombre es obligatorio</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción*</label>
+            <textarea class="form-control" id="descripcion" rows="3" formControlName="descripcion"
+                    [ngClass]="{'is-invalid': submitted && f['descripcion'].errors}"></textarea>
+            <div *ngIf="submitted && f['descripcion'].errors" class="invalid-feedback">
+            <div *ngIf="f['descripcion'].errors['required']">La descripción es obligatoria</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio*</label>
+            <input type="number" class="form-control" id="precio" formControlName="precio" step="0.01"
+                    [ngClass]="{'is-invalid': submitted && f['precio'].errors}">
+            <div *ngIf="submitted && f['precio'].errors" class="invalid-feedback">
+                <div *ngIf="f['precio'].errors['required']">El precio es obligatorio</div>
+                <div *ngIf="f['precio'].errors['min']">El precio debe ser mayor o igual a 0</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="imagen" class="form-label">URL de la imagen</label>
+            <input type="text" class="form-control" id="imagen" formControlName="imagen">
+        </div>
+
+        <div class="mb-3">
+            <label for="plataforma" class="form-label">Plataforma*</label>
+            <input type="text" class="form-control" id="plataforma" formControlName="plataforma"
+                    [ngClass]="{'is-invalid': submitted && f['plataforma'].errors}">
+            <div *ngIf="submitted && f['plataforma'].errors" class="invalid-feedback">
+                <div *ngIf="f['plataforma'].errors['required']">La plataforma es obligatoria</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="estudio" class="form-label">Estudio*</label>
+            <input type="text" class="form-control" id="estudio" formControlName="estudio"
+                    [ngClass]="{'is-invalid': submitted && f['estudio'].errors}">
+            <div *ngIf="submitted && f['estudio'].errors" class="invalid-feedback">
+                <div *ngIf="f['estudio'].errors['required']">El estudio es obligatorio</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary me-2">{{ isEditMode ? 'Actualizar' : 'Añadir' }} Videojuego</button>
+            <button type="button" class="btn btn-secondary" routerLink="/videojuegos">Cancelar</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,251 @@
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #e74c3c;
+  --accent-color: #3498db;
+  --text-color: #333;
+  --light-text: #666;
+  --lighter-text: #999;
+  --background-color: #f8f9fa;
+  --card-background: #ffffff;
+  --border-radius: 8px;
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.loader {
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 5px solid var(--secondary-color);
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader-text {
+  margin-top: 1rem;
+  color: var(--light-text);
+  font-size: 1.1rem;
+}
+
+.error-message {
+  background-color: rgba(231, 76, 60, 0.1);
+  border-left: 4px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.error-icon {
+  font-size: 3rem;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.error-message p {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.game-detail-container {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
+.game-header {
+  padding: 2rem;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.game-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.game-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.game-studio, .game-platform {
+  display: inline-flex;
+  align-items: center;
+}
+
+.game-studio::before {
+  content: '🏢';
+  margin-right: 0.5rem;
+}
+
+.game-platform::before {
+  content: '🎮';
+  margin-right: 0.5rem;
+}
+
+.game-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.game-image-container {
+  position: relative;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  height: 400px;
+}
+
+.game-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.game-image:hover {
+  transform: scale(1.05);
+}
+
+.no-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  color: var(--light-text);
+}
+
+.no-image-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.info-section {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.game-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 0.9rem;
+  color: var(--lighter-text);
+  margin-bottom: 0.3rem;
+}
+
+.detail-value {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.detail-value.price {
+  color: var(--secondary-color);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.game-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.action-btn {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.action-btn i {
+  margin-right: 0.5rem;
+}
+
+.action-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .game-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .game-image-container {
+    height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .game-header {
+    padding: 1.5rem;
+  }
+  
+  .game-title {
+    font-size: 2rem;
+  }
+  
+  .game-content {
+    padding: 1.5rem;
+  }
+  
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .game-actions {
+    flex-direction: column;
+  }
+}

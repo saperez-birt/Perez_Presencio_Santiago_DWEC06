@@ -1,0 +1,70 @@
+<!-- videojuego-detail.component.html -->
+<div class="container mt-5">
+  <!-- Loader animado -->
+  <div *ngIf="cargando" class="loader-container">
+    <div class="loader"></div>
+    <p class="loader-text">Cargando detalles del videojuego...</p>
+  </div>
+
+  <!-- Mensaje de error mejorado -->
+  <div *ngIf="error" class="error-message">
+    <i class="fas fa-exclamation-circle error-icon"></i>
+    <p>{{ error }}</p>
+    <button class="btn btn-outline-primary mt-3" (click)="volver()">Volver al catálogo</button>
+  </div>
+
+  <!-- Detalles del videojuego con diseño mejorado -->
+  <div *ngIf="videojuego && !cargando && !error" class="game-detail-container">
+    <div class="game-header">
+      <h1 class="game-title">{{ videojuego.getNombre() }}</h1>
+      <div class="game-meta">
+        <span class="game-studio">{{ videojuego.getEstudio() }}</span>
+        <span class="game-platform">{{ videojuego.getPlataforma() }}</span>
+      </div>
+    </div>
+
+    <div class="game-content">
+      <div class="game-image-container">
+        <img *ngIf="videojuego.getImagen()" [src]="videojuego.getImagen()" class="game-image" alt="{{ videojuego.getNombre() }}">
+        <div *ngIf="!videojuego.getImagen()" class="no-image">
+          <i class="fas fa-gamepad no-image-icon"></i>
+          <p>Imagen no disponible</p>
+        </div>
+      </div>
+
+      <div class="game-info">
+        <div class="info-section">
+          <h2 class="section-title">Descripción</h2>
+          <p class="game-description">{{ videojuego.getDescripcion() }}</p>
+        </div>
+
+        <div class="info-section">
+          <h2 class="section-title">Detalles</h2>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <span class="detail-label">Estudio</span>
+              <span class="detail-value">{{ videojuego.getEstudio() }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Plataforma</span>
+              <span class="detail-value">{{ videojuego.getPlataforma() }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Precio</span>
+              <span class="detail-value price">{{ videojuego.getPrecio() | currency:'EUR' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-actions">
+          <button class="btn btn-primary btn-lg action-btn" (click)="editarVideojuego()">
+            <i class="fas fa-edit"></i> Editar
+          </button>
+          <button class="btn btn-outline-secondary btn-lg action-btn" (click)="volver()">
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
